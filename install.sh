@@ -4,23 +4,42 @@
 # Todo: Make this an egg.
 set -e
 
+
+apt_install(){
+    local package="${1}"
+    local installed=$(dpkg --get-selections \
+                               | grep -v deinstall \
+                               | grep -E "^${package}\s+install"\
+                               | grep -o "${package}")
+    if [[ "${installed}" = ""  ]]; then
+        echo "Installing ${package} via apt-get"
+        sudo apt-get -y install "${package}"
+        echo "Installation of ${package} completed."
+    else
+        echo "${package} already installed. Skipping...."
+    fi
+}
+
+
+
 # In case this is the seconds time user runs setup, remove prior symlinks:
 rm -f /usr/bin/sslstrip_snoopy
 rm -f /usr/bin/snoopy
 rm -f /usr/bin/snoopy_auth
 rm -f /etc/transforms
 
-apt-get install ntpdate --force-yes --yes
-#if ps aux | grep ntp | grep -qv grep; then 
+apt_install "ntpdate"
+#if ps aux | grep ntp | grep -qv grep; then
 if [ -f /etc/init.d/ntp ]; then
-	/etc/init.d/ntp stop
-else 
-	# Needed for Kali Linux build on Raspberry Pi
-	apt-get install ntp
-	/etc/init.d/ntp stop
+        /etc/init.d/ntp stop
+else
+        # Needed for Kali Linux build on Raspberry Pi
+        apt_install "ntp-server"
+        /etc/init.d/ntp stop
 fi
+
 echo "[+] Setting time with ntp"
-ntpdate ntp.ubuntu.com 
+ntpdate ntp.ubuntu.com
 /etc/init.d/ntp start
 
 echo "[+] Setting timzeone..."
@@ -34,7 +53,29 @@ apt-get update
 
 # Packages
 echo "[+] Installing required packages..."
-apt-get install --force-yes --yes python-setuptools autossh python-psutil python2.7-dev libpcap0.8-dev ppp tcpdump python-serial sqlite3 python-requests iw build-essential python-bluez python-flask python-gps python-dateutil python-dev libxml2-dev libxslt-dev pyrit mitmproxy
+apt_install "libssl-dev"
+apt_install "libffi-dev"
+apt_install "python-setuptools"
+apt_install "autossh"
+apt_install "python-psutil"
+apt_install "python2.7-dev"
+apt_install "libpcap0.8-dev"
+apt_install "ppp"
+apt_install "tcpdump"
+apt_install "python-serial"
+apt_install "sqlite3"
+apt_install "python-requests"
+apt_install "iw"
+apt_install "build-essential"
+apt_install "python-bluez"
+apt_install "python-flask"
+apt_install "python-gps"
+apt_install "python-dateutil"
+apt_install "python-dev"
+apt_install "libxml2-dev"
+apt_install "libxslt-dev"
+apt_install "pyrit"
+apt_install "mitmproxy"
 
 # Python packages
 
