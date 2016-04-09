@@ -60,7 +60,7 @@ rm -f /etc/transforms
 
 echo "[+] Updating repository..."
 apt-get update
-apt-get upgrade
+apt-get upgrade -y
 
 
 apt_install "ntpdate"
@@ -69,7 +69,7 @@ if [ -f /etc/init.d/ntp ]; then
         /etc/init.d/ntp stop
 else
         # Needed for Kali Linux build on Raspberry Pi
-        apt_install "ntp-server"
+        apt_install "ntp"
         /etc/init.d/ntp stop
 fi
 
