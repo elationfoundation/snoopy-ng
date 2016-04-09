@@ -57,6 +57,12 @@ rm -f /usr/bin/snoopy
 rm -f /usr/bin/snoopy_auth
 rm -f /etc/transforms
 
+
+echo "[+] Updating repository..."
+apt-get update
+apt-get upgrade
+
+
 apt_install "ntpdate"
 #if ps aux | grep ntp | grep -qv grep; then
 if [ -f /etc/init.d/ntp ]; then
@@ -76,11 +82,6 @@ echo "Etc/UTC" > /etc/timezone
 dpkg-reconfigure -f noninteractive tzdata
 echo "[+] Installing sakis3g..."
 cp ./includes/sakis3g /usr/local/bin
-
-echo "[+] Updating repository..."
-apt-get update
-
-apt-get upgrade
 
 # Packages
 echo "[+] Installing required packages..."
