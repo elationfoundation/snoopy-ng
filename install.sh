@@ -87,7 +87,7 @@ cp ./includes/sakis3g /usr/local/bin
 echo "[+] Installing required packages..."
 apt_install "build-essential"
 apt_install "libpcap-dev"
-apt_install "python-pypcap"
+#apt_install "python-pypcap"
 apt_install "libssl-dev"
 apt_install "libffi-dev"
 apt_install "python-setuptools"
@@ -138,7 +138,8 @@ pip install https://pypi.python.org/packages/source/p/pyserial/pyserial-2.6.tar.
 pip_install_url "pyserial" "https://pypi.python.org/packages/source/p/pyserial/pyserial-2.6.tar.gz"
 
 echo "[+] Downloading pylibpcap..."
-pip_install_url "pylibpcap"  "https://sourceforge.net/projects/pylibpcap/files/latest/download?source=files#egg=pylibpcap"
+pip_install "pylibpcap"
+#pip_install_url "pylibpcap"  "https://sourceforge.net/projects/pylibpcap/files/latest/download?source=files#egg=pylibpcap"
 
 echo "[+] Downloading dpkt..."
 pip_install_url "dpkt" "https://dpkt.googlecode.com/files/dpkt-1.8.tar.gz"
