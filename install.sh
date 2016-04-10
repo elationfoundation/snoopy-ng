@@ -62,7 +62,6 @@ echo "[+] Updating repository..."
 apt-get update
 apt-get upgrade -y
 
-
 apt_install "ntpdate"
 #if ps aux | grep ntp | grep -qv grep; then
 if [ -f /etc/init.d/ntp ]; then
@@ -110,7 +109,10 @@ apt_install "python-dev"
 apt_install "libxml2-dev"
 apt_install "libxslt-dev"
 apt_install "pyrit"
-apt_install "mitmproxy"
+#apt_install "mitmproxy"
+
+# needed for mitmproxy via pillow dependenciy
+apt_install "libjpeg-dev"
 
 # Python packages
 
@@ -123,7 +125,7 @@ pip install -Iv https://pypi.python.org/packages/source/r/requests/requests-0.14
 pip_install "httplib2"
 pip_install "BeautifulSoup"
 pip_install "publicsuffix"
-#pip install mitmproxy
+pip install mitmproxy
 pip_install "pyinotify"
 pip_install "netifaces"
 pip_install "dnslib"
@@ -137,9 +139,12 @@ echo "[+] Installing pyserial 2.6"
 pip install https://pypi.python.org/packages/source/p/pyserial/pyserial-2.6.tar.gz
 pip_install_url "pyserial" "https://pypi.python.org/packages/source/p/pyserial/pyserial-2.6.tar.gz"
 
+# Install python-libpcap from debian sid
 echo "[+] Downloading pylibpcap..."
-pip_install "pylibpcap"
-#pip_install_url "pylibpcap"  "https://sourceforge.net/projects/pylibpcap/files/latest/download?source=files#egg=pylibpcap"
+echo "deb http://ftp.de.debian.org/debian sid main" >> /etc/apt/sources.list
+apt-get update
+sed -i 's/.*sid.*//' /etc/apt/sources.list
+apt-get update
 
 echo "[+] Downloading dpkt..."
 pip_install_url "dpkt" "https://dpkt.googlecode.com/files/dpkt-1.8.tar.gz"
