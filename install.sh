@@ -4,7 +4,6 @@
 # Todo: Make this an egg.
 set -e
 
-
 apt_install(){
     local package="${1}"
     local installed=$(dpkg --get-selections \
@@ -84,35 +83,40 @@ cp ./includes/sakis3g /usr/local/bin
 
 # Packages
 echo "[+] Installing required packages..."
-apt_install "build-essential"
-apt_install "libpcap-dev"
 #apt_install "python-pypcap"
-apt_install "libssl-dev"
-apt_install "libffi-dev"
-apt_install "python-setuptools"
 apt_install "autossh"
-apt_install "python-psutil"
-apt_install "python2.7-dev"
-apt_install "libpcap0.8-dev"
-apt_install "ppp"
-apt_install "tcpdump"
-apt_install "python-serial"
-apt_install "sqlite3"
-apt_install "python-requests"
-apt_install "iw"
 apt_install "build-essential"
-apt_install "python-bluez"
-apt_install "python-flask"
-apt_install "python-gps"
-apt_install "python-dateutil"
-apt_install "python-dev"
+apt_install "iw"
+apt_install "libffi-dev"
+apt_install "libjpeg8-dev"
+apt_install "libpcap-dev"
+apt_install "libpcap0.8-dev"
+apt_install "libssl-dev"
 apt_install "libxml2-dev"
 apt_install "libxslt-dev"
+apt_install "ppp"
 apt_install "pyrit"
-#apt_install "mitmproxy"
+apt_install "python-bluez"
+apt_install "python-certifi"
+apt_install "python-dateutil"
+apt_install "python-dev"
+apt_install "python-flask"
+apt_install "python-gps"
+apt_install "python-hyperframe"
+apt_install "python-psutil"
+apt_install "python-requests"
+apt_install "python-serial"
+apt_install "python-setuptools"
+apt_install "python2.7-dev"
+apt_install "sqlite3"
+apt_install "tcpdump"
 
+
+# mitmproxy packages
+#apt_install "python-hpack"
+#apt_install "mitmproxy"
 # needed for mitmproxy via pillow dependenciy
-apt_install "libjpeg-dev"
+#apt_install "libjpeg-dev"
 
 # Python packages
 
@@ -125,7 +129,7 @@ pip install -Iv https://pypi.python.org/packages/source/r/requests/requests-0.14
 pip_install "httplib2"
 pip_install "BeautifulSoup"
 pip_install "publicsuffix"
-pip install mitmproxy
+pip install "mitmproxy"
 pip_install "pyinotify"
 pip_install "netifaces"
 pip_install "dnslib"
