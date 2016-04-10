@@ -86,8 +86,8 @@ cp ./includes/sakis3g /usr/local/bin
 # Packages
 echo "[+] Installing required packages..."
 apt_install "build-essential"
-#apt_install "libpcap-dev"
-apt_install "python-libpcap"
+apt_install "libpcap-dev"
+apt_install "python-pypcap"
 apt_install "libssl-dev"
 apt_install "libffi-dev"
 apt_install "python-setuptools"
@@ -136,6 +136,7 @@ ln -s /usr/share/sslstripSnoopy/sslstrip.py /usr/bin/sslstrip_snoopy
 echo "[+] Installing pyserial 2.6"
 pip install https://pypi.python.org/packages/source/p/pyserial/pyserial-2.6.tar.gz
 pip_install_url "pyserial" "https://pypi.python.org/packages/source/p/pyserial/pyserial-2.6.tar.gz"
+
 echo "[+] Downloading pylibpcap..."
 pip_install_url "pylibpcap"  "https://sourceforge.net/projects/pylibpcap/files/latest/download?source=files#egg=pylibpcap"
 
