@@ -86,7 +86,8 @@ cp ./includes/sakis3g /usr/local/bin
 # Packages
 echo "[+] Installing required packages..."
 apt_install "build-essential"
-apt_install "libpcap-dev"
+#apt_install "libpcap-dev"
+apt_install "python-libpcap"
 apt_install "libssl-dev"
 apt_install "libffi-dev"
 apt_install "python-setuptools"
